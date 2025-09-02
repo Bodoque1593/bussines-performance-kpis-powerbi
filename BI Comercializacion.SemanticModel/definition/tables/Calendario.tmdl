@@ -1,0 +1,80 @@
+table Calendario
+	lineageTag: 4af73cb6-599f-4bf6-80ab-e2d18e9a1ddd
+
+	column FECHA
+		dataType: dateTime
+		formatString: d/mm/yyyy
+		lineageTag: 55720bb8-dc76-44ee-9349-f390c7c5fca3
+		summarizeBy: none
+		sourceColumn: FECHA
+		sortByColumn: NUMERO_MES
+
+		variation Variación
+			isDefault
+			relationship: 222c69d8-6f65-41f1-b133-8ada0d358c1c
+			defaultHierarchy: LocalDateTable_0bc95a91-54ad-4aeb-9d0f-d5a78d583aa9.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column NUMERO_MES
+		dataType: int64
+		formatString: 0
+		lineageTag: d2570d7d-d47c-4f3b-8927-68eeea7a4c5d
+		summarizeBy: sum
+		sourceColumn: NUMERO_MES
+
+		annotation SummarizationSetBy = Automatic
+
+	column MES
+		dataType: string
+		lineageTag: 3acacc7f-a4f4-465c-a92a-a33fe8eca329
+		summarizeBy: none
+		sourceColumn: MES
+		sortByColumn: NUMERO_MES
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column AÑO
+		dataType: string
+		lineageTag: af04d979-4842-4418-aaf0-faa7a4e8c608
+		summarizeBy: none
+		sourceColumn: AÑO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column PERIODO
+		dataType: string
+		lineageTag: 258bfc05-a38f-4745-b9f2-06391d6dccb4
+		summarizeBy: none
+		sourceColumn: PERIODO
+		sortByColumn: NUMERO_MES
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	partition Calendario-79aa88ea-4aa0-4a4f-9150-8df23f20b475 = m
+		mode: import
+		source =
+				let
+				    Origen = Excel.Workbook(File.Contents("C:\Users\JuanCamiloBeltranDue\Pactia\Documentos Corporativos - Comercial\Gerencias de Producto\Cumplimiento_BI\Calendario\Tabla_Calendario.xlsx"), null, true),
+				    Calendario_Table = Origen{[Item="Calendario",Kind="Table"]}[Data],
+				    #"Tipo cambiado" = Table.TransformColumnTypes(Calendario_Table,{{"FECHA", type date}, {"NUMERO_MES", Int64.Type}, {"MES", type text}, {"AÑO", Int64.Type}}),
+				    #"Primeros caracteres insertados" = Table.AddColumn(#"Tipo cambiado", "Primeros caracteres", each Text.Start([MES], 3), type text),
+				    #"Últimos caracteres insertados" = Table.AddColumn(#"Primeros caracteres insertados", "Últimos caracteres", each Text.End(Text.From([AÑO], "es-CO"), 2), type text),
+				    #"Personalizada agregada" = Table.AddColumn(#"Últimos caracteres insertados", "PERIODO", each [Primeros caracteres]&"/"&[Últimos caracteres]),
+				    #"Columnas quitadas" = Table.RemoveColumns(#"Personalizada agregada",{"Primeros caracteres", "Últimos caracteres"}),
+				    #"Tipo cambiado1" = Table.TransformColumnTypes(#"Columnas quitadas",{{"NUMERO_MES", Int64.Type}, {"AÑO", type text}})
+				in
+				    #"Tipo cambiado1"
+
+	annotation PBI_ResultType = Table
+

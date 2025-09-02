@@ -1,0 +1,33 @@
+relationship 222c69d8-6f65-41f1-b133-8ada0d358c1c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Calendario.FECHA
+	toColumn: LocalDateTable_0bc95a91-54ad-4aeb-9d0f-d5a78d583aa9.Date
+
+relationship 62ef3a4d-53ea-45d7-873e-dffd07c01762
+	fromColumn: Activos.PRODUCTO_CRM
+	toColumn: Momentanea_Activos.crm
+
+relationship 7280313b-85bc-4558-8445-bb30acc3506f
+	fromColumn: Cierres.'Hora de creación'
+	toColumn: Calendario.FECHA
+
+relationship e55a5109-b8b3-470d-ac05-395dbd4cf4ef
+	fromColumn: Cierres.'Ejecutivo Comercial'
+	toColumn: Ejecutivos.EJECUTIVOS_CRM
+
+relationship fe058125-f7f6-4ded-afdc-e2e5a39ea9b1
+	fromColumn: Cierres.Activo
+	toColumn: Activos.ACTIVO_SAP
+
+relationship 974ec094-76da-4fc9-ac39-0867f8f1623e
+	fromColumn: Comercializacion_area_defintivo.Activo
+	toColumn: Activos.ACTIVO_SAP
+
+relationship c41ff05d-eb78-4b17-894f-e00cec0ee92c
+	fromColumn: Comercializacion_area_defintivo.Fecha
+	toColumn: Calendario.FECHA
+
+relationship fc415af4-1a6e-4e9c-8ac1-e13b7e864817
+	fromColumn: Comercializacion_area_defintivo.Ejecutivo
+	toColumn: Ejecutivos.EJECUTIVOS_CRM
+

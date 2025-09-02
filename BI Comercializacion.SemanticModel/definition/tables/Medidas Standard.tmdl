@@ -1,0 +1,82 @@
+table 'Medidas Standard'
+	lineageTag: dde436dc-3e67-43dd-82a9-2689d707f471
+
+	measure EstandarPlanArea = CALCULATE([Areaplan],Ejecutivos[SEGMENTO] = "Standard")
+		formatString: 0
+		lineageTag: 6c9c76a7-5ee8-4691-98b1-504b0d671476
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Cumplimiento Standard' = [CierreStandard] / [EstandarPlanArea]
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: aac2b05a-be79-456d-a8c1-8ef6cadb187d
+
+	measure AdmStandard = CALCULATE([DivisionAdm],Ejecutivos[SEGMENTO] = "Standard")
+		formatString: \$\ #,0;-\$\ #,0;\$\ #,0
+		lineageTag: 2f10521a-1243-4aac-b80c-27c9daa0c8b5
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-CO"}
+
+	measure OftMarcaStand = CALCULATE([ConteoMarca],Ejecutivos[SEGMENTO] = "Standard")
+		formatString: 0
+		lineageTag: 24f0e212-6767-413e-a2c1-55f7a8d973d2
+
+	measure RentaTotalStandard = CALCULATE([Renta Total],Ejecutivos[SEGMENTO] = "Standard")
+		formatString: \$\ #,0;-\$\ #,0;\$\ #,0
+		lineageTag: 0518e3d1-2cba-4230-8a32-2d8c6c28671c
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-CO"}
+
+	measure CierreStandard = CALCULATE([Area Cie],Ejecutivos[SEGMENTO] = "Standard")
+		formatString: 0
+		lineageTag: 726934ca-16a5-4ba2-a6c8-8b414f0ccec5
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Standard tope' = IF([CierreStandard] > [EstandarPlanArea], [CierreStandard], [EstandarPlanArea])
+		lineageTag: 0e676976-5ca7-4924-94d9-0a0924bc3744
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'M2 standard' = [RentaTotalStandard]/[CierreStandard]
+		formatString: \$\ #,0;-\$\ #,0;\$\ #,0
+		lineageTag: 99a64a9a-ac40-4840-8758-c5a1e7cf6310
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-CO"}
+
+	measure oftcuentdesstand = CALCULATE([CuentaOftdesis], Ejecutivos[SEGMENTO] = "Standard")
+		formatString: 0
+		lineageTag: e33520ca-a528-407d-9699-c94d781090ca
+
+	measure procendesisstand = CALCULATE([porcendesisti],Ejecutivos[SEGMENTO] ="Standard")
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: 4944bfa9-6d7a-455c-bf4c-6e3b4d050ae7
+
+	measure Rentastandardesis = CALCULATE([RentaDesis],Ejecutivos[SEGMENTO] ="Standard")
+		formatString: \$\ #,0.###############;-\$\ #,0.###############;\$\ #,0.###############
+		lineageTag: 1791e638-0b10-452b-b0e7-ade0680be7b1
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-CO"}
+
+	measure areadesisstanda = CALCULATE([SumAreaDesis], Ejecutivos[SEGMENTO] = "Standard")
+		lineageTag: 944819a5-c772-44d7-ae20-41db97e52425
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Columna
+		formatString: 0
+		lineageTag: 40cd8b87-2390-45fc-845d-753cba63d0ba
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Columna]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Medidas Standard-1f6c3f59-14a7-4321-9e6e-460189f22de3' = calculated
+		mode: import
+		source = Row("Columna", BLANK())
+
+	annotation PBI_Id = d3e40bb09c2247638130d1c7bbfd2489
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

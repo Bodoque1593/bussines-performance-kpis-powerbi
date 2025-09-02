@@ -1,0 +1,33 @@
+model Model
+	culture: es-ES
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: es-CO
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["Calendario","Ejecutivos","Activos","Momentanea_Activos","Cierres","Comercializacion_area_defintivo"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.146.1254.0 (25.08)+791a7518fadc83da883d79322a2658aff57c8db3
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table DateTableTemplate_485c5880-b78a-4b4c-b238-4feeef319980
+ref table Calendario
+ref table LocalDateTable_0bc95a91-54ad-4aeb-9d0f-d5a78d583aa9
+ref table Ejecutivos
+ref table Activos
+ref table Momentanea_Activos
+ref table Cierres
+ref table 'Medidas Basicas'
+ref table 'Medidas Premium'
+ref table 'Medidas Rendimiento'
+ref table 'Medidas Standard'
+ref table 'Medida Medium'
+ref table Desistidos
+ref table Comercializacion_area_defintivo
+
+ref cultureInfo es-ES
+

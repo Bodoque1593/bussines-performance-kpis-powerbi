@@ -1,0 +1,61 @@
+table Ejecutivos
+	lineageTag: 1ef3136f-2e29-4a56-aed6-9a07e5b507c2
+
+	column COD_EJECUTIVO
+		dataType: string
+		isHidden
+		lineageTag: cc793d76-dbd0-4195-80cf-cb2edc6de094
+		summarizeBy: none
+		sourceColumn: COD_EJECUTIVO
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column SEGMENTO
+		dataType: string
+		lineageTag: bd4a0ab4-14e1-473d-a6ab-ffbc503160ab
+		summarizeBy: none
+		sourceColumn: SEGMENTO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column EJECUTIVO_SAP
+		dataType: string
+		lineageTag: ced2253e-ebf2-4b7f-b45a-977224a94af1
+		summarizeBy: none
+		sourceColumn: EJECUTIVO_SAP
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column EJECUTIVOS_CRM
+		dataType: string
+		isHidden
+		lineageTag: 00e105a1-af02-4faf-8354-a7fe537599e5
+		summarizeBy: none
+		sourceColumn: EJECUTIVOS_CRM
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	partition Ejecutivos-c185d94e-c025-43e1-a854-2fecb3e0d543 = m
+		mode: import
+		source =
+				let
+				    Origen = Excel.Workbook(File.Contents("C:\Users\JuanCamiloBeltranDue\Pactia\Documentos Corporativos - Comercial\Gerencias de Producto\Cumplimiento_BI\Ejecutivos\Tabla Segmento Ejecutivos.xlsx"), null, true),
+				    Ejecutivos_Table = Origen{[Item="Ejecutivos",Kind="Table"]}[Data],
+				    #"Tipo cambiado" = Table.TransformColumnTypes(Ejecutivos_Table,{{"COD_EJECUTIVO", type text}, {"SEGMENTO", type text}, {"EJECUTIVO_SAP", type text}, {"EJECUTIVOS_CRM", type text}})
+				in
+				    #"Tipo cambiado"
+
+	annotation PBI_ResultType = Table
+

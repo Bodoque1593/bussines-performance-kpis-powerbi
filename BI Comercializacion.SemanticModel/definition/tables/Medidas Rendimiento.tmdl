@@ -1,0 +1,55 @@
+table 'Medidas Rendimiento'
+	lineageTag: b4c06438-6368-45c2-aff3-78db8641b880
+
+	measure Areaplan = sum(Comercializacion_area_defintivo[Area Plan])
+		formatString: 0
+		lineageTag: a6bf5285-8597-46a2-bb85-93479d79e555
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure RentaPlan = SUM(Comercializacion_area_defintivo[Comercializacion_Renta.Valor])
+		lineageTag: 2c7385b9-85fe-4cf7-80bc-94e906582bdc
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Adm Plan' = SUM(Comercializacion_area_defintivo[Comercializacion_Admon.Valor])
+		lineageTag: 5fe89b8f-9ee4-43e8-bee3-de39cf0a4f3f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Cumplimento Area' = [Area Cie] / [Areaplan]
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: e7bdd17e-0c57-42db-bbd1-b59726ae4fc6
+
+	measure 'Cumplimiento Renta' = [Renta Total]/[RentaPlan]
+		formatString: #,0.00\ %;-#,0.00\ %;#,0.00\ %
+		lineageTag: 54c6e207-b8d4-4496-bedf-5c2f0b158480
+
+	measure 'Cumplimiento Adm' = [DivisionAdm]/[Adm Plan]
+		formatString: \$\ #,0.###############;-\$\ #,0.###############;\$\ #,0.###############
+		lineageTag: 30035cdd-fca8-48c1-803d-369b6a3aa991
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-CO"}
+
+	measure 'Tope general' = if([Area Cie]>[Areaplan],[Area Cie],[Areaplan])
+		lineageTag: c6af96bb-4aae-4cd5-bbfc-48b44598dfa2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Columna
+		formatString: 0
+		lineageTag: eb06a19a-cfea-42f1-8a43-fb0e4c66ae80
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Columna]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Medidas Rendimiento-ab57b337-f559-471c-a638-0582ebd2bf70' = calculated
+		mode: import
+		source = Row("Columna", BLANK())
+
+	annotation PBI_Id = f727d737569c492ebbe02204364bf473
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

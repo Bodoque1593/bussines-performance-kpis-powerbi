@@ -1,0 +1,81 @@
+table 'Medida Medium'
+	lineageTag: 1fbf6e38-bbce-43d2-a52b-a4713dac6eb5
+
+	measure CierreMedium = CALCULATE([Area Cie],Ejecutivos[SEGMENTO] = "Medium")
+		formatString: 0
+		lineageTag: bbe8f7c9-1f0f-4e13-a02f-80af2066b028
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure RentaTotalMedium = CALCULATE([Renta Total],Ejecutivos[SEGMENTO] = "Medium")
+		formatString: \$\ #,0;-\$\ #,0;\$\ #,0
+		lineageTag: 7c8d8d41-f072-4cff-82c2-65118b62ca76
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-CO"}
+
+	measure OftMarcaMed = CALCULATE([ConteoMarca], Ejecutivos[SEGMENTO] = "Medium")
+		formatString: 0
+		lineageTag: a5c06d37-69d5-4390-ba92-b31dceab39a6
+
+	measure AdmMedium = CALCULATE([DivisionAdm],Ejecutivos[SEGMENTO] = "Medium")
+		formatString: \$\ #,0;-\$\ #,0;\$\ #,0
+		lineageTag: 02d8841d-3eba-41fc-9b9e-9ec885e2deee
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-CO"}
+
+	measure AreaPlanMedium = CALCULATE([Areaplan],Ejecutivos[SEGMENTO] = "Medium")
+		formatString: 0
+		lineageTag: 85902574-812d-4921-a3b9-6433df1e4e70
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Cumplimiento Medium' = [CierreMedium]/[AreaPlanMedium]
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 1107f160-d541-42c6-8c12-10a8dbf82c03
+
+	measure 'Medium tope' = IF([CierreMedium] > [AreaPlanMedium], [CierreMedium] , [AreaPlanMedium])
+		lineageTag: 71821771-3512-44fa-aad9-8b2faa3b5f09
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'M2 MEDIUM' = [RentaTotalMedium]/'Medida Medium'[CierreMedium]
+		formatString: \$\ #,0;-\$\ #,0;\$\ #,0
+		lineageTag: 158817c9-b55b-4caf-8358-c7e2c42ae770
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-CO"}
+
+	measure Mediumoftdesis = CALCULATE([CuentaOftdesis],Ejecutivos[SEGMENTO] = "Medium")
+		formatString: 0
+		lineageTag: 82069b6f-ee58-4edb-9f2d-8f1cadad79a6
+
+	measure porcendesimediu = CALCULATE([porcendesisti],Ejecutivos[SEGMENTO] = "Medium")
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 141d8778-130b-452c-807a-49ba51e3293b
+
+	measure rentadesismedi = CALCULATE([RentaDesis],Ejecutivos[SEGMENTO] = "Medium")
+		formatString: \$\ #,0.###############;-\$\ #,0.###############;\$\ #,0.###############
+		lineageTag: 20906e82-63be-42fd-9ff3-9559e39abff2
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-CO"}
+
+	measure areadesis = CALCULATE(Desistidos[SumAreaDesis],Ejecutivos[SEGMENTO] = "Medium")
+		lineageTag: e06b797e-b8be-4d42-91b1-4353c24d233e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Columna
+		lineageTag: 674daf63-ba53-4f5d-83c5-76a39c723e3b
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Columna]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Medida Medium-42e39561-47a2-4e6e-a370-19726e35bfa6' = calculated
+		mode: import
+		source = Row("Columna", BLANK())
+
+	annotation PBI_Id = a05fdc6086434482a588ed4ef8bc2905
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

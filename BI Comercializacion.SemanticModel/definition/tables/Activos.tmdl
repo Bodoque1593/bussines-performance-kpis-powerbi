@@ -1,0 +1,112 @@
+table Activos
+	lineageTag: b8dcb874-6481-4216-aa7b-881ac96f3383
+
+	column ACTIVO_SAP
+		dataType: string
+		lineageTag: 0a7a5c88-b0dc-49b0-a6b8-a4628507e19a
+		summarizeBy: none
+		sourceColumn: ACTIVO_SAP
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column ACTIVO_CRM
+		dataType: string
+		lineageTag: 67fed9d7-b231-4e46-abd2-2dcd849e4de1
+		summarizeBy: none
+		sourceColumn: ACTIVO_CRM
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column PRODUCTO_SAP
+		dataType: string
+		isHidden
+		lineageTag: 47dc26f0-78a8-494b-b1f1-74848abf9f63
+		summarizeBy: none
+		sourceColumn: PRODUCTO_SAP
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column PRODUCTO_CRM
+		dataType: string
+		isHidden
+		lineageTag: 776c58a7-c948-48c4-9b10-6a456f6a89be
+		summarizeBy: none
+		sourceColumn: PRODUCTO_CRM
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column SUB_PRODUCTO
+		dataType: string
+		lineageTag: 3ae6ff52-ea75-4247-88cf-7444f9476077
+		summarizeBy: none
+		sourceColumn: SUB_PRODUCTO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Llave_Activos
+		dataType: string
+		isHidden
+		lineageTag: 2558a3e5-0da2-4e83-a203-7fce76c295c9
+		summarizeBy: none
+		sourceColumn: Llave_Activos
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column LLAVE
+		dataType: string
+		isHidden
+		lineageTag: 8cc17a1d-5c55-4edc-af60-5083a66e8cac
+		summarizeBy: none
+		sourceColumn: LLAVE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Columna1
+		dataType: string
+		lineageTag: 29b42f69-b0c0-46b3-a058-09c8a5f49560
+		summarizeBy: none
+		sourceColumn: Columna1
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	partition Activos-5c056c6b-6aa8-4a36-843a-492bdb4934a4 = m
+		mode: import
+		source =
+				let
+				    Origen = Excel.Workbook(File.Contents("C:\Users\JuanCamiloBeltranDue\Pactia\Documentos Corporativos - Comercial\Gerencias de Producto\Cumplimiento_BI\Activos\Tabla Relaciones Activos.xlsx"), null, true),
+				    Activos_Table = Origen{[Item="Activos",Kind="Table"]}[Data],
+				    #"Tipo cambiado" = Table.TransformColumnTypes(Activos_Table,{{"SOCIEDAD", type text}, {"UND_ECONOMICO", type text}, {"EDIFICIO", type text}, {"ACTIVO_SAP", type text}, {"ACTIVO_CRM", type text}, {"PRODUCTO_SAP", type text}, {"PRODUCTO_CRM", type text}, {"SUB_PRODUCTO", type text}, {"ESTADO", type text}, {"POR_ESTADO_DE_OPERACION", type text}, {"%_PARTICIPACION", type number}, {"PAIS", type text}, {"UBICACION_REGIONAL", type text}}),
+				    #"Personalizada agregada" = Table.AddColumn(#"Tipo cambiado", "Llave_Activos", each [SOCIEDAD]&"-"&[UND_ECONOMICO]&"-"&[EDIFICIO]),
+				    #"Columnas reordenadas" = Table.ReorderColumns(#"Personalizada agregada",{"Llave_Activos", "ACTIVO_CRM", "SOCIEDAD", "UND_ECONOMICO", "EDIFICIO", "ACTIVO_SAP", "PRODUCTO_SAP", "PRODUCTO_CRM", "SUB_PRODUCTO", "ESTADO", "POR_ESTADO_DE_OPERACION", "%_PARTICIPACION", "PAIS", "UBICACION_REGIONAL"}),
+				    #"Columnas quitadas" = Table.RemoveColumns(#"Columnas reordenadas",{"ESTADO", "POR_ESTADO_DE_OPERACION", "%_PARTICIPACION", "PAIS", "UBICACION_REGIONAL", "SOCIEDAD", "UND_ECONOMICO", "EDIFICIO"}),
+				    #"Columnas reordenadas1" = Table.ReorderColumns(#"Columnas quitadas",{"Llave_Activos", "ACTIVO_SAP", "ACTIVO_CRM", "PRODUCTO_SAP", "PRODUCTO_CRM", "SUB_PRODUCTO"}),
+				    #"Columnas reordenadas2" = Table.ReorderColumns(#"Columnas reordenadas1",{"Llave_Activos", "SUB_PRODUCTO", "PRODUCTO_SAP", "PRODUCTO_CRM"})
+				in
+				    #"Columnas reordenadas2"
+
+	annotation PBI_ResultType = Table
+

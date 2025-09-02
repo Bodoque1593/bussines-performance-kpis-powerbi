@@ -1,0 +1,278 @@
+table Cierres
+	lineageTag: 1359de03-1eed-4e70-8315-0564105d7711
+
+	column 'Número de oferta-otrosí'
+		dataType: string
+		lineageTag: 724bb8ab-6d4b-4954-9283-52d75d295361
+		summarizeBy: none
+		sourceColumn: Número de oferta-otrosí
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Etapa de la oferta-otrosí'
+		dataType: string
+		lineageTag: c71af498-62c0-4682-938c-01c4db2f55d9
+		summarizeBy: none
+		sourceColumn: Etapa de la oferta-otrosí
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Activo
+		dataType: string
+		isHidden
+		lineageTag: 74759ceb-64aa-46ff-9a55-4dc802a2a2c6
+		summarizeBy: none
+		sourceColumn: Activo
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Cliente
+		dataType: string
+		lineageTag: 3daf8617-adfe-4eb4-9045-7e5f21b25ecb
+		summarizeBy: none
+		sourceColumn: Cliente
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Marca Nombre Comercial'
+		dataType: string
+		lineageTag: 8bdec081-45d3-4e38-afc0-fea933724120
+		summarizeBy: none
+		sourceColumn: Marca Nombre Comercial
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Ejecutivo Comercial'
+		dataType: string
+		isHidden
+		lineageTag: a45c587e-de2d-4109-9264-bd55c7688a17
+		summarizeBy: none
+		sourceColumn: Ejecutivo Comercial
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Producto
+		dataType: string
+		isHidden
+		lineageTag: 3239836a-18ea-4388-91e3-7c4f0096eeed
+		summarizeBy: none
+		sourceColumn: Producto
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Objeto de Alquiler'
+		dataType: string
+		lineageTag: f14f812d-2c7f-426e-9d09-bda8d297c02c
+		summarizeBy: none
+		sourceColumn: Objeto de Alquiler
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Area
+		dataType: double
+		lineageTag: 06de8269-2d2e-4522-b75b-92c26bc39f93
+		summarizeBy: sum
+		sourceColumn: Area
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Hora de creación'
+		dataType: dateTime
+		isHidden
+		formatString: d/mm/yyyy
+		lineageTag: 4a2c1e44-f11d-424f-ba40-d00d9015eb71
+		summarizeBy: none
+		sourceColumn: Hora de creación
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Número de oferta en SAP'
+		dataType: string
+		lineageTag: 47605f12-d848-45fb-a06a-415a5d7277d3
+		summarizeBy: none
+		sourceColumn: Número de oferta en SAP
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Duracion del contrato'
+		dataType: string
+		lineageTag: 4afe620b-963a-4e32-9df2-d746a4a635e4
+		summarizeBy: none
+		sourceColumn: Duracion del contrato
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Valor m2 - Valor total'
+		dataType: decimal
+		formatString: \$\ #,0.###############;-\$\ #,0.###############;\$\ #,0.###############
+		lineageTag: 086841a9-e74a-4bd9-b451-2f81825ba860
+		summarizeBy: sum
+		sourceColumn: Valor m2 - Valor total
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-CO"}
+
+	column 'Valor Total Admon'
+		dataType: decimal
+		formatString: \$\ #,0.###############;-\$\ #,0.###############;\$\ #,0.###############
+		lineageTag: 4f57f302-4ee6-48a3-afce-59ba85f7f8d7
+		summarizeBy: sum
+		sourceColumn: Valor Total Admon
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-CO"}
+
+	column '% Variable'
+		dataType: string
+		lineageTag: ed4dc621-8b96-4366-b9c7-c1c7b2a53d70
+		summarizeBy: none
+		sourceColumn: % Variable
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Asignado a'
+		dataType: string
+		lineageTag: 9536bc31-0e4b-4dea-9d2c-acde75087f96
+		summarizeBy: none
+		sourceColumn: Asignado a
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Objeto de Alquiler.1'
+		dataType: string
+		lineageTag: ad78badd-f97d-4382-bc67-f149e842848f
+		summarizeBy: none
+		sourceColumn: Objeto de Alquiler.1
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Tipo de Condición'
+		dataType: string
+		lineageTag: 7c1e46ec-b4a8-46d7-bd95-e82f7d13c8cd
+		summarizeBy: none
+		sourceColumn: Tipo de Condición
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Tipo_Objeto
+		dataType: string
+		lineageTag: 5a7d9b45-f08a-492a-854d-212cef87917a
+		summarizeBy: none
+		sourceColumn: Tipo_Objeto
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Rental Total'
+		dataType: decimal
+		formatString: \$\ #,0.###############;-\$\ #,0.###############;\$\ #,0.###############
+		lineageTag: f68faa70-6597-4a14-a9c6-f75d4b680bc3
+		summarizeBy: sum
+		sourceColumn: Rental Total
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-CO"}
+
+	column Año = YEAR(Cierres[Hora de creación])
+		dataType: string
+		lineageTag: d3ef83ad-a439-479d-bba0-87c0417a3529
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Mes = MONTH(Cierres[Hora de creación])
+		formatString: 0
+		lineageTag: ee079198-3aea-4a7d-9b2c-710fceea6a55
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Desistidos = IF(Cierres[Etapa de la oferta-otrosí] = "Pre-desistido - Gestión Ccial" || Cierres[Etapa de la oferta-otrosí] = "Desistido cliente" || Cierres[Etapa de la oferta-otrosí] = "Cancelado" || Cierres[Etapa de la oferta-otrosí]= "Desistido Pactia", "Desistido","En Proceso")
+		lineageTag: 696e031d-2600-44f4-91fd-e5bdb7007d4b
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Tipo Negocio' = IF(Cierres[Activo] = "LOGIKA VÍA 40 VENTA", "Venta","Arrendamiento")
+		lineageTag: a1b61a31-5eda-4714-bdb0-80a0e413ca49
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	partition Cierres-43d9ffe8-8ea7-43f8-b77d-9f185e9298c6 = m
+		mode: import
+		source =
+				let
+				    Origen = Excel.Workbook(File.Contents("C:\Users\JuanCamiloBeltranDue\Pactia\Documentos Corporativos - Comercial\Gerencias de Producto\Cumplimiento_BI\Cierres_Ejecutivos\Cierres Ejecutivos - Ofertas Contatos.xls"), null, true),
+				    Worksheet1 = Origen{[Name="Worksheet"]}[Data],
+				    #"Encabezados promovidos" = Table.PromoteHeaders(Worksheet1, [PromoteAllScalars=true]),
+				    #"Columnas con nombre cambiado2" = Table.RenameColumns(#"Encabezados promovidos",{{"Ejecutivo Comercial", "Ejecutivo Comercial"}, {"Duración del contrato", "Duracion del contrato"}}),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(#"Columnas con nombre cambiado2",{{"Número de oferta-otrosí", type text}, {"Etapa de la oferta-otrosí", type text}, {"Activo", type text}, {"Cliente", type text}, {"Marca Nombre Comercial", type text}, {"Ejecutivo Comercial", type text}, {"Producto", type text}, {"Objeto de Alquiler", type text}, {"Area", type number}, {"Hora de creación", type text}, {"Número de oferta en SAP", Int64.Type}, {"Duracion del contrato", type text}, {"Valor m2 - Valor total", type number}, {"Valor Total Admon", type number}, {"% Variable", Int64.Type}, {"Asignado a", type text}}),
+				    agrupoxoftyobj = Table.Group(#"Tipo cambiado", {"Número de oferta-otrosí", "Objeto de Alquiler"}, {{"Recuento", each _, type table [#"Número de oferta-otrosí"=nullable text, #"Etapa de la oferta-otrosí"=nullable text, Activo=nullable text, Cliente=nullable text, Marca Nombre Comercial=nullable text, Ejecutivo Comercial=nullable text, Producto=nullable text, Objeto de Alquiler=nullable text, Area=nullable number, Hora de creación=nullable text, Número de oferta en SAP=nullable number, Duracion del contrato=nullable text, #"Valor m2 - Valor total"=nullable number, Valor Total Admon=nullable number, #"% Variable"=nullable number, Asignado a=nullable text, Tipo de Condición=nullable text, Precio neto=nullable text]}}),
+				    seleccionoprimerafila = Table.AddColumn(agrupoxoftyobj, "Personalizado", each Table.FirstN([Recuento],1)),
+				    expandodata = Table.ExpandTableColumn(seleccionoprimerafila, "Personalizado", {"Número de oferta-otrosí", "Etapa de la oferta-otrosí", "Activo", "Cliente", "Marca Nombre Comercial", "Ejecutivo Comercial", "Producto", "Objeto de Alquiler", "Area", "Hora de creación", "Número de oferta en SAP", "Duracion del contrato", "Valor m2 - Valor total", "Valor Total Admon", "% Variable", "Asignado a", "Tipo de Condición", "Precio neto"}, {"Número de oferta-otrosí.1", "Etapa de la oferta-otrosí", "Activo", "Cliente", "Marca Nombre Comercial", "Ejecutivo Comercial", "Producto", "Objeto de Alquiler.1", "Area", "Hora de creación", "Número de oferta en SAP", "Duracion del contrato", "Valor m2 - Valor total", "Valor Total Admon", "% Variable", "Asignado a", "Tipo de Condición", "Precio neto"}),
+				    eliminocolumnasquena = Table.RemoveColumns(expandodata,{"Recuento", "Número de oferta-otrosí.1"}),
+				    #"Tipo cambiado1" = Table.TransformColumnTypes(eliminocolumnasquena,{{"Precio neto", Currency.Type}}),
+				    Cambionombretotal = Table.RenameColumns(#"Tipo cambiado1",{{"Precio neto", "Rental Total"}}),
+				    modificacionfecha1 = Table.TransformColumns(Cambionombretotal, {{"Hora de creación", each Text.Start(_, 10), type text}}),
+				    modificacionfecha = Table.TransformColumnTypes(modificacionfecha1,{{"Hora de creación", type date}}),
+				    #"Columna condicional agregada" = Table.AddColumn(modificacionfecha, "Personalizado", each if Text.Contains([Objeto de Alquiler], "ZC") then "Zona Común" else "Estándar"),
+				    #"Columnas con nombre cambiado" = Table.RenameColumns(#"Columna condicional agregada",{{"Personalizado", "Tipo_Objeto"}}),
+				    #"Tipo cambiado2" = Table.TransformColumnTypes(#"Columnas con nombre cambiado",{{"Objeto de Alquiler.1", type text}, {"Area", type number}, {"Hora de creación", type date}, {"Número de oferta en SAP", type text}, {"Valor m2 - Valor total", Currency.Type}, {"Valor Total Admon", Currency.Type}, {"% Variable", type text}})
+				in
+				    #"Tipo cambiado2"
+
+	annotation PBI_ResultType = Table
+

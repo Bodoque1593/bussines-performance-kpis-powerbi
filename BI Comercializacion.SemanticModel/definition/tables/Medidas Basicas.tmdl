@@ -1,0 +1,63 @@
+table 'Medidas Basicas'
+	lineageTag: f882a171-b7b8-4394-a359-5e2f8fde3e71
+
+	measure 'Area Cie' = SUM(Cierres[Area])
+		formatString: #,0
+		lineageTag: 28473a67-c22c-49de-b39e-e838ac4ab326
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Adm Cie' = sum(Cierres[Valor Total Admon])
+		formatString: \$\ #,0.###############;-\$\ #,0.###############;\$\ #,0.###############
+		lineageTag: f63b3f0c-12a3-41ac-be9e-d770099533dd
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-CO"}
+
+	measure 'Adm m2' = [DivisionAdm]/[Area Cie]
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 0df8337b-d5ba-4f15-a45b-6d242bb726ff
+
+	measure 'Renta Total' = SUM(Cierres[Rental Total])
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 8847b0a1-533d-41af-8dab-84164c1ccb21
+
+	measure 'Renta m2' = [Renta Total]/[Area Cie]
+		formatString: \$\ #,0;-\$\ #,0;\$\ #,0
+		lineageTag: 1b2eacd1-94d3-4064-a0f3-76952fb2955b
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-CO"}
+
+	measure ConteoOFT = COUNT(Cierres[Número de oferta-otrosí])
+		formatString: 0
+		lineageTag: cad8d27b-d7ac-4cf7-9865-08f6c0bc6fbd
+
+	measure DivisionAdm = [Adm Cie]/[ConteoOFT]
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 7f2b5895-ce4e-46bb-be37-e6e92acf9e65
+
+	measure ConteoMarca = DISTINCTCOUNT(Cierres[Número de oferta-otrosí])
+		formatString: 0
+		lineageTag: 61e3431e-c8cc-4230-a7fd-e7968942b97f
+
+	measure AgruparMarca = GROUPBY(Cierres,Cierres[Número de oferta-otrosí])
+		lineageTag: 4d548551-7655-4040-8bb9-48f5f1556a31
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Columna
+		formatString: 0
+		lineageTag: bf4925e3-86cd-4010-9c08-0efca12f3396
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Columna]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Medidas Basicas-04073d9f-6731-4053-8e47-d49b7a609a04' = calculated
+		mode: import
+		source = Row("Columna", BLANK())
+
+	annotation PBI_Id = df0b854c463f49479c9cd0090c5b97c8
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

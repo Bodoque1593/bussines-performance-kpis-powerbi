@@ -1,0 +1,47 @@
+table Desistidos
+	lineageTag: 47c4e8d0-17a4-4fb9-91ff-8fc6f4d16bdf
+
+	measure SumAreaDesis = CALCULATE(SUM(Cierres[Area]), Cierres[Desistidos] = "Desistido")
+		lineageTag: 8b5fab0c-6642-436a-87f9-fd612823610b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure CuentaOftdesis = CALCULATE(DISTINCTCOUNT(Cierres[Etapa de la oferta-otrosí]), Cierres[Desistidos] = "Desistido")
+		formatString: 0
+		lineageTag: 7e735a21-89aa-4549-b278-89dc5830e945
+
+	measure porcendesisti = DIVIDE([SumAreaDesis],[Area Cie], BLANK())
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: bacb5bf0-21a6-4ec6-ae7f-1067af25c573
+
+	measure RentaDesis = CALCULATE(SUM(Cierres[Rental Total]),Cierres[Desistidos] = "Desistido")
+		formatString: \$\ #,0;-\$\ #,0;\$\ #,0
+		lineageTag: 581e1ae7-c1c3-4c2f-9e02-e1f26fbae817
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-CO"}
+
+	measure SumAdmDesistiestan = CALCULATE([sumadmdesis],Ejecutivos[SEGMENTO] = "Desistido")
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 656d9834-019f-482a-9f41-65b651615ad5
+
+	measure sumadmdesis = CALCULATE([DivisionAdm], Desistidos[Columna] ="Desistido")
+		formatString: 0
+		lineageTag: 25c9da36-1c4b-41eb-a56b-95696a472e13
+
+	column Columna
+		formatString: 0
+		lineageTag: 7c8c00c2-47d2-4bd4-b001-bfd14bb90295
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Columna]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Desistidos-62931b63-b743-4852-be49-f51b1a3fa8ff = calculated
+		mode: import
+		source = Row("Columna", BLANK())
+
+	annotation PBI_Id = 19754385ce2e424a9e8a200027b96612
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

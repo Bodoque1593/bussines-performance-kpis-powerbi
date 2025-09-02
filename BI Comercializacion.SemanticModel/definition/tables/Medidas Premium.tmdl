@@ -1,0 +1,90 @@
+table 'Medidas Premium'
+	lineageTag: c424aa9f-30a2-488e-8fe4-167a5d61df86
+
+	measure CierrePremium = CALCULATE([Area Cie],Ejecutivos[SEGMENTO] = "Premium")
+		formatString: 0
+		lineageTag: 35e8c2bf-f3c8-43b9-a435-b252927511b0
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure OftMarcaPre = CALCULATE([ConteoMarca], Ejecutivos[SEGMENTO] = "Premium")
+		formatString: 0
+		lineageTag: 35ae4f3a-5b24-434d-8797-ef2da3838e37
+
+	measure RentaTotalPre = CALCULATE([Renta Total],Ejecutivos[SEGMENTO] = "Premium")
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: d8c3733d-a8e4-400e-9ae5-5143e0e7eff9
+
+	measure AdmPremium = CALCULATE([DivisionAdm],Ejecutivos[SEGMENTO] = "Premium")
+		formatString: \$\ #,0;-\$\ #,0;\$\ #,0
+		lineageTag: 105f8561-b35c-49c1-b47e-b042ceab0851
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-CO"}
+
+	measure AreaPlanPre = CALCULATE([Areaplan], Ejecutivos[SEGMENTO] = "Premium")
+		formatString: 0
+		lineageTag: ef97af95-4cd5-45d2-bf1e-1cb874be65eb
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure RentaPlanPre = CALCULATE([RentaPlan],Ejecutivos[SEGMENTO] = "Premium")
+		lineageTag: 3f5c46c3-b910-487a-a1fa-cd2cb1fc7b83
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure AdmPlanPre = CALCULATE([Adm Plan], Ejecutivos[SEGMENTO] = "Premium")
+		lineageTag: 404846ff-7487-4841-848c-b45ea08981a1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Cumplimiento Premium Area' = [CierrePremium] / [AreaPlanPre]
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: e0cb3968-3191-4ccc-a133-e643a4a417be
+
+	measure 'Premium Tope' = IF([CierrePremium] > 'Medidas Premium'[AreaPlanPre], [CierrePremium],'Medidas Premium'[AreaPlanPre])
+		lineageTag: 72044f6b-b79f-44b5-afc5-a1f4cfb02db5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'M2 Premium' = [RentaTotalPre]/[CierrePremium]
+		formatString: \$\ #,0;-\$\ #,0;\$\ #,0
+		lineageTag: e5b4ce1f-c370-4c98-85ca-6ac4b03debef
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-CO"}
+
+	measure Cuentadesispremium = CALCULATE([CuentaOftdesis], Ejecutivos[SEGMENTO] = "Premium")
+		formatString: 0
+		lineageTag: 388045a9-1806-49d0-b3bf-001995aef1e1
+
+	measure areadesisprem = CALCULATE([SumAreaDesis],Ejecutivos[SEGMENTO] = "Premium")
+		lineageTag: d704a27e-8eea-4812-b8ae-563afbdaa11f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure porcedesispre = CALCULATE([porcendesisti], Ejecutivos[SEGMENTO] = "Premium")
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 03516b57-a6e2-4468-9f7a-f777a8a2a8a3
+
+	measure rentapremiumdesis = CALCULATE([RentaDesis], Ejecutivos[SEGMENTO] ="Premium")
+		formatString: \$\ #,0.###############;-\$\ #,0.###############;\$\ #,0.###############
+		lineageTag: 0cf09929-2d20-469f-950d-a2cb9d4db603
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-CO"}
+
+	column Columna
+		formatString: 0
+		lineageTag: 7dfd00ec-6972-46af-ae61-e44c971aa7bc
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Columna]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Medidas Premium-4e0ddbf2-7f25-4522-9bb6-7c25f98f5bc8' = calculated
+		mode: import
+		source = Row("Columna", BLANK())
+
+	annotation PBI_Id = 29f357c8c8c94ebcb1084d3bddba5ebd
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

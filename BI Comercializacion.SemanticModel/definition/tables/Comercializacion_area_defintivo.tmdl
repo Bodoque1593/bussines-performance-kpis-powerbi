@@ -1,0 +1,96 @@
+table Comercializacion_area_defintivo
+	lineageTag: a4b284e3-2d06-4013-8540-7b9524054f5c
+
+	column Mes
+		dataType: string
+		lineageTag: 5bcc68a3-6fd1-4390-aa1e-fe6bf8799841
+		summarizeBy: none
+		sourceColumn: Mes
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Fecha
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: dd6dca75-46a3-4ed1-b3ba-6b32aa249e55
+		summarizeBy: none
+		sourceColumn: Fecha
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Segmento
+		dataType: string
+		lineageTag: fa8f8191-9e35-4a9a-9cf8-40fcd4ee4e65
+		summarizeBy: none
+		sourceColumn: Segmento
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Ejecutivo
+		dataType: string
+		lineageTag: 9be0eb22-f9ab-40a4-bfa4-83894303ad36
+		summarizeBy: none
+		sourceColumn: Ejecutivo
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Activo
+		dataType: string
+		lineageTag: 058c01a3-e3cc-40cd-aa97-f0b1d7ae66ac
+		summarizeBy: none
+		sourceColumn: Activo
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Area Plan'
+		dataType: double
+		lineageTag: bceb421b-f9ad-4b8c-93b0-bd518974591f
+		summarizeBy: sum
+		sourceColumn: Area Plan
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Comercializacion_Renta.Valor'
+		dataType: double
+		lineageTag: 677f30bb-bce8-4a27-807b-20282e43c9db
+		summarizeBy: sum
+		sourceColumn: Comercializacion_Renta.Valor
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Comercializacion_Admon.Valor'
+		dataType: double
+		lineageTag: cf86ae40-178c-4a47-94e3-c6823acfeb51
+		summarizeBy: sum
+		sourceColumn: Comercializacion_Admon.Valor
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Comercializacion_area_defintivo-664f2d8c-c086-4436-9bca-af6580eb4158 = m
+		mode: import
+		source =
+				let
+				    Origen = Excel.Workbook(File.Contents("C:\Users\JuanCamiloBeltranDue\Pactia\Documentos Corporativos - Comercial\Gerencias de Producto\Cumplimiento_BI\Maestra Metas Comerciales 2021 V2.xlsx"), null, true),
+				    Comercializacion_area_defintivo_Table = Origen{[Item="Comercializacion_area_defintivo",Kind="Table"]}[Data],
+				    #"Tipo cambiado" = Table.TransformColumnTypes(Comercializacion_area_defintivo_Table,{{"Mes", type text}, {"Fecha", type date}, {"Segmento", type text}, {"Ejecutivo", type text}, {"Activo", type text}, {"Area Plan", type number}, {"Comercializacion_Renta.Valor", type number}, {"Comercializacion_Admon.Valor", type number}})
+				in
+				    #"Tipo cambiado"
+
+	annotation PBI_ResultType = Table
+

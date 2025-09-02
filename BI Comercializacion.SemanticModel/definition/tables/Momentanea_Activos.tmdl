@@ -1,0 +1,38 @@
+table Momentanea_Activos
+	lineageTag: 67599ac8-7c61-4d86-889e-ab63b4594356
+
+	column 'Linea Negocio SAP'
+		dataType: string
+		lineageTag: 14c92d32-78b7-48f2-bfe5-3b782ece87ec
+		summarizeBy: none
+		sourceColumn: Linea Negocio SAP
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column crm
+		dataType: string
+		isHidden
+		lineageTag: f2a32e41-f473-4faa-946d-a650af9118ed
+		summarizeBy: none
+		sourceColumn: crm
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	partition Momentanea_Activos-468560ec-3530-44ea-a835-431a7789ed6e = m
+		mode: import
+		source =
+				let
+				    Origen = Excel.Workbook(File.Contents("C:\Users\JuanCamiloBeltranDue\Pactia\Documentos Corporativos - Comercial\Gerencias de Producto\Cumplimiento_BI\Linea de Negocios\Linea_De_Negocio.xlsx"), null, true),
+				    Momentanea_Activos_Table = Origen{[Item="Momentanea_Activos",Kind="Table"]}[Data],
+				    #"Tipo cambiado" = Table.TransformColumnTypes(Momentanea_Activos_Table,{{"Linea Negocio SAP", type text}, {"crm", type text}})
+				in
+				    #"Tipo cambiado"
+
+	annotation PBI_ResultType = Table
+
